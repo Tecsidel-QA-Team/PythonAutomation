@@ -26,10 +26,7 @@ class senacBackOffice(unittest.TestCase):
         driver = settings.driver
         driver.get(baseUrl)
         time.sleep(5)
-        driver.find_element_by_id(loginField).send_keys("00001")
-        driver.find_element_by_name(passField).send_keys("00001")
-        driver.find_element_by_name(loginButton).click()
-        time.sleep(5)
+        self.settings.loginPage("00001", "00001")
         linkSel = driver.find_element_by_id("ctl00_LblUser").text
         if linkSel == "Util.:":
             self.selLink = senacSettings.frenlink

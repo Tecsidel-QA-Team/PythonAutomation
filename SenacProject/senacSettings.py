@@ -1,5 +1,6 @@
 from selenium import webdriver
 import random
+import time
 from selenium.webdriver.support.ui import Select
 
 nameOp = ["Pilar", "Mavi", "Franklyn", "Gemma", "Fatima", "Marc", "Miguel", "Francisco", "Oscar", "Maria Jesus"]
@@ -11,11 +12,19 @@ cpAdress = ["28041", "28041", "08022", "28041", "28041","08022","47151","47151",
 townC = ["Madrid", "Madrid", "Barcelona", "Madrid", "Madrid", "Barcelona", "Valladolid","Valladolid","Valladolid","Valladolid"]
 infoCuenta0 = "ctl00_ContentZone_ctrlAccountData_radio_company_0";
 infoCuenta1 = "ctl00_ContentZone_ctrlAccountData_radio_company_1";
+opIdField = "ctl00_ContentZone_operatorId_box_data";
 titulofield = "ctl00_ContentZone_ctrlAccountData_cmb_title_cmb_dropdown";
 namef = "ctl00_ContentZone_ctrlAccountData_txt_forname_box_data";
+nameField = "ctl00_ContentZone_forename_box_data";
 surnamef ="ctl00_ContentZone_ctrlAccountData_txt_surname_box_data";
 addressf = "ctl00_ContentZone_ctrlAccountData_txt_address_box_data";
 cpf = "ctl00_ContentZone_ctrlAccountData_txt_postcode_box_data";
+lastNameField = "ctl00_ContentZone_surname_box_data";
+emailField = "ctl00_ContentZone_email_box_data";
+groupOperator = "ctl00_ContentZone_group_cmb_dropdown";
+pwdField = "ctl00_ContentZone_password_box_data";
+repeatpwdField = "ctl00_ContentZone_password2_box_data";
+hourNumber = "ctl00_ContentZone_TxtNomHousr_box_data";
 townf = "ctl00_ContentZone_ctrlAccountData_txt_town_box_data";
 countryf = "ctl00_ContentZone_ctrlAccountData_txt_country_box_data";
 emailf ="ctl00_ContentZone_ctrlAccountData_txt_email_box_data";
@@ -50,6 +59,7 @@ baseUrl="http://virtualbo-qa/BOQAHostSenac/web/forms/core/login.aspx"
 loginField = "BoxLogin"
 passField = "BoxPassword"
 loginButton = "BtnLogin"
+submitBtn = "ctl00_ButtonsZone_BtnSubmit";
 
 class senacSettingsMethod():
     def setUp(self):
@@ -73,6 +83,13 @@ class senacSettingsMethod():
     def elementClick(self, By):
         driver = self.driver
         driver.find_element_by_id(By).click()
+        
+    def loginPage(self, usr, pwd):
+        driver = self.driver
+        driver.find_element_by_id(loginField).send_keys(usr)
+        driver.find_element_by_name(passField).send_keys(pwd)
+        driver.find_element_by_name(loginButton).click()
+        time.sleep(5)
         
     
         
