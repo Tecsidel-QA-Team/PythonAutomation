@@ -55,7 +55,8 @@ camionModels = [["Mercedes-Benz","Scania"],["Axor","R500"],["Actros","P400"]];
 furgonetaModels = [["Mercedes-Benz","Fiat"],["Vito","Scudo"],["Citan","Ducato"]];
 cicloModels = [["Yamaha","Honda"],["XT1200Z","Forza 300"],["T-MAX SX","X-ADV"]]
 autoBusModels = [["DAIMLER-BENZ","VOLVO"],["512-CDI","FM-12380"],["DB 605","FM 300"]]
-baseUrl="http://virtualbo-qa/BOQAHostSenac/web/forms/core/login.aspx"
+HostbaseUrl="http://virtualbo-qa/BOQAHostSenac/web/forms/core/login.aspx"
+PlazabaseUrl="http://virtualbo-qa/BOQAPlazaSenac/web/forms/core/login.aspx"
 loginField = "BoxLogin"
 passField = "BoxPassword"
 loginButton = "BtnLogin"
@@ -76,6 +77,13 @@ class senacSettingsMethod():
         if vdd>=len(dd):
             vdd = len(dd)-1
         Select(driver.find_element_by_id(By)).select_by_index(vdd)
+        
+    def loginPage(self, usr,pwd):
+        driver = self.driver
+        driver.find_element_by_id(loginField).send_keys(usr)
+        driver.find_element_by_id(passField).send_keys(pwd)
+        driver.find_element_by_id(loginButton).click()
+        time.sleep(2)
     
     def ranNumbr(self, val1, val2):
         return (random.randint(val1, val2))
@@ -84,12 +92,7 @@ class senacSettingsMethod():
         driver = self.driver
         driver.find_element_by_id(By).click()
         
-    def loginPage(self, usr, pwd):
-        driver = self.driver
-        driver.find_element_by_id(loginField).send_keys(usr)
-        driver.find_element_by_name(passField).send_keys(pwd)
-        driver.find_element_by_name(loginButton).click()
-        time.sleep(5)
+
         
     
         

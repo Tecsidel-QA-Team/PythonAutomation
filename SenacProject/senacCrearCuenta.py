@@ -1,16 +1,14 @@
 import unittest
 import time
 from selenium.webdriver.common.action_chains import ActionChains
-from senacSettings import nameOp, baseUrl, infoCuenta0, sexSelcSpan, titulofield,\
-    namef, surnamef, lastNameOp, loginField, passField, loginButton, infoCuenta1,\
-    companyf, contactf, addressf, addressTec, cpf, cpAdress, townf, emailf,\
-    phoneCel, townC, workPhone, workPhone1, perPhone, faxPhone, countryf,\
+from senacSettings import nameOp, HostbaseUrl, infoCuenta0, titulofield,\
+    namef, surnamef, lastNameOp, companyf, contactf, addressf, addressTec, cpf, cpAdress, townf, emailf,\
+    phoneCel, townC, workPhone, workPhone1, perPhone, faxPhone, countryf,infoCuenta1,\
     senacSettingsMethod, matletT, camionModels, cocheModels, cicloModels,\
-    autoBusModels, furgonetaModels, colorS, matriNu, vehtypeModel, vehtypeKind,\
-    confirmationMessage, tagIdNmbr, errorTagAssignment
+    autoBusModels, furgonetaModels, colorS, tagIdNmbr, errorTagAssignment
 from selenium.webdriver.support.ui import Select
 import senacSettings
-from _operator import or_
+
 
 class senacBackOffice(unittest.TestCase):
     
@@ -24,7 +22,7 @@ class senacBackOffice(unittest.TestCase):
         
         settings = self.settings
         driver = settings.driver
-        driver.get(baseUrl)
+        driver.get(HostbaseUrl)
         time.sleep(5)
         self.settings.loginPage("00001", "00001")
         linkSel = driver.find_element_by_id("ctl00_LblUser").text
