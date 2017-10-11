@@ -1,6 +1,7 @@
 from selenium import webdriver
 import random
 import time
+from datetime import datetime, timedelta
 from selenium.webdriver.support.ui import Select
 
 nameOp = ["Pilar", "Mavi", "Franklyn", "Gemma", "Fatima", "Marc", "Miguel", "Francisco", "Oscar", "Maria Jesus"]
@@ -60,14 +61,16 @@ PlazabaseUrl="http://virtualbo-qa/BOQAPlazaSenac/web/forms/core/login.aspx"
 loginField = "BoxLogin"
 passField = "BoxPassword"
 loginButton = "BtnLogin"
-submitBtn = "ctl00_ButtonsZone_BtnSubmit";
+submitBtn = "ctl00_ButtonsZone_BtnSubmit"
+timet = ('{:%Y%m%d%H%M%S}'.format(datetime.now()))
+
 
 class senacSettingsMethod():
     def setUp(self):
         self.driver = webdriver.Chrome("C:/Selenium/chromedriver")
         self.driver.maximize_window()
         
-    def selectDropDown(self, By):
+    def selectDropDown(self, By):        
         driver = self.driver
         vDropdown = Select(driver.find_element_by_id(By))
         dd = vDropdown.options
@@ -91,6 +94,12 @@ class senacSettingsMethod():
     def elementClick(self, By):
         driver = self.driver
         driver.find_element_by_id(By).click()
+        
+    def dateSel(self, start, end, fmt):
+        s = datetime.strptime(start, fmt)
+        e = datetime.strptime(end, fmt)
+        delta = e - s
+        return s + timedelta(days=(random.random() * delta.days))
         
 
         

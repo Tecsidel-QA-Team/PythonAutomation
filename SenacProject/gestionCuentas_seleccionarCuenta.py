@@ -44,7 +44,7 @@ class senacBackOffice(unittest.TestCase):
                 time.sleep(1);                                    
             
         except:           
-            fail()
+            unittest.TestCase.fail(self, Exception)
             
 
 if __name__== "__main__":
