@@ -15,6 +15,7 @@ class senacBackOffice(unittest.TestCase):
     def test(self):
         settings = self.settings
         driver = self.settings.driver
+        settings.borrarArchivos("E:\\workspace\\Mavi_Repository\\gestionTurnos_realizarBusqueda\\attachments\\")
         try:
             driver.get(HostbaseUrl)
             driver.get_screenshot_as_file("E:\\Selenium\\loginpageSenac_"+timet+".jpeg")

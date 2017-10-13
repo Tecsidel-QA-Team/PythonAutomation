@@ -11,7 +11,7 @@ from selenium.common.exceptions import NoAlertPresentException
 
 class senacBackOffice(unittest.TestCase):
     
-    isAlertPresent = False
+    
         
     def setUp(self):
         self.settings = senacSettingsMethod()
@@ -20,7 +20,8 @@ class senacBackOffice(unittest.TestCase):
     def test(self):        
         settings = self.settings
         driver = settings.driver        
-        fileError = "RedditionErr"        
+        fileError = "RedditionErr"  
+        settings.borrarArchivos("E:\\workspace\\Mavi_Repository\\gestionFonds_Reddition\\attachments\\")      
         try:            
             driver.get(PlazabaseUrl)
             time.sleep(1)

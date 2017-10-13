@@ -2,9 +2,9 @@
 
 import unittest
 import time
+import os.path
 from selenium.webdriver.common.action_chains import ActionChains
 from senacSettings import  senacSettingsMethod , HostbaseUrl, timet
-
 
 class senacBackOffice(unittest.TestCase):
     
@@ -16,6 +16,7 @@ class senacBackOffice(unittest.TestCase):
     def test(self):
         settings = self.settings
         driver = settings.driver
+        settings.borrarArchivos("E:\\workspace\\Mavi_Repository\\transacciones_revisionTransacciones\\attachments\\")                   
         try:
             driver.get(HostbaseUrl)
             driver.get_screenshot_as_file("E:\\Selenium\\loginpageSenac_"+timet+".jpeg")

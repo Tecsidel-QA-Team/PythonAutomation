@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import unittest
 import time
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
 from senacSettings import  senacSettingsMethod , HostbaseUrl, timet
-from test.test_deque import fail
 from selenium.common.exceptions import NoAlertPresentException
 from _overlapped import NULL
 
@@ -12,7 +13,7 @@ from _overlapped import NULL
 class senacBackOffice(unittest.TestCase):
     dateS = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre", "Octubre", "Noviembre", "Diciembre"]
     telP = ["ctl00_ContentZone_Prepay", "ctl00_ContentZone_Postpay"]
-    promoSel = ["En funci\xf3n de recarga", "En funci\xf3n de tr\xe1nsitos", "En funci\xf3n del horario"]
+    promoSel = ["En función de recarga", "En función de tránsitos", "En función del horario"]
     weekDay = ["ctl00_ContentZone_chk_lundi","ctl00_ContentZone_chk_mardi","ctl00_ContentZone_chk_mercredi","ctl00_ContentZone_chk_jeudi","ctl00_ContentZone_chk_vendredi","ctl00_ContentZone_chk_samedi","ctl00_ContentZone_chk_dimanche"]    
         
     def setUp(self):
@@ -22,7 +23,8 @@ class senacBackOffice(unittest.TestCase):
     def test(self):
         settings = self.settings
         driver = settings.driver      
-        promoSel = self.promoSel                         
+        promoSel = self.promoSel  
+        settings.borrarArchivos("E:\\workspace\\Mavi_Repository\\telecargas_Promociones\\attachments\\")                       
         try:
             driver.get(HostbaseUrl)
             driver.get_screenshot_as_file("E:\\Selenium\\loginpageSenac_"+timet+".jpeg")
@@ -34,11 +36,11 @@ class senacBackOffice(unittest.TestCase):
             driver.get_screenshot_as_file("E:\\Selenium\\homepageSenac_"+timet+".jpeg")
             driver.get_screenshot_as_file("E:\\workspace\\Mavi_Repository\\telecargas_Promociones\\attachments\\homepageSenac.jpeg")
             time.sleep(1)
-            ActionChains(driver).click_and_hold(driver.find_element_by_link_text("Configuraci\xf3n sistema")).perform()
+            ActionChains(driver).click_and_hold(driver.find_element_by_link_text("Configuración sistema")).perform()
             time.sleep(1)
             ActionChains(driver).click_and_hold(driver.find_element_by_link_text("Promociones")).perform()
             time.sleep(1)
-            self.linkSel = 2##settings.ranNumbr(0,2)
+            self.linkSel = settings.ranNumbr(0,2)
             driver.find_element_by_link_text(promoSel[self.linkSel]).click()
             time.sleep(2)
             selectLink = {
@@ -142,9 +144,9 @@ class senacBackOffice(unittest.TestCase):
         time.sleep(.50)
         driver.find_element_by_id("ctl00_ContentZone_TXTPassageGratuit_box_data").send_keys(str(settings.ranNumbr(1,999)))
         time.sleep(.50)
-        driver.find_element_by_id("ctl00_ContentZone_TXtMsgPromotionTFI_box_data").send_keys("Promoci\xf3n de "+self.dateS[self.dateFromR2])
+        driver.find_element_by_id("ctl00_ContentZone_TXtMsgPromotionTFI_box_data").send_keys("Promoción de "+self.dateS[self.dateFromR2])
         time.sleep(.50)
-        driver.find_element_by_id("ctl00_ContentZone_TXtMsgPromotion_box_data").send_keys("La Nueva Promoci\xf3n de "+self.dateS[self.dateFromR2])
+        driver.find_element_by_id("ctl00_ContentZone_TXtMsgPromotion_box_data").send_keys("La Nueva Promoción de "+self.dateS[self.dateFromR2])
         time.sleep(.50)
         settings.selectDropDown("ctl00_ContentZone_Vias")
         time.sleep(.50)
@@ -194,7 +196,7 @@ class senacBackOffice(unittest.TestCase):
         driver.find_element_by_id("ctl00_ContentZone_dtmTo_box_date").clear()
         driver.find_element_by_id("ctl00_ContentZone_dtmTo_box_date").send_keys('{:%d/%m/%Y}'.format(settings.dateSel("01/01/2017", "31/12/2018","%d/%m/%Y")))
         time.sleep(.50)
-        driver.find_element_by_id("ctl00_ContentZone_TXtMsgPromotion_box_data").send_keys("La Nueva Promoci\xf3n de "+self.dateS[self.dateFromR2]);
+        driver.find_element_by_id("ctl00_ContentZone_TXtMsgPromotion_box_data").send_keys("La Nueva Promoción de "+self.dateS[self.dateFromR2]);
         time.sleep(.50)
         settings.selectDropDown("ctl00_ContentZone_Vias")
         time.sleep(.50)

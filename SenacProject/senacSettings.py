@@ -1,4 +1,5 @@
 from selenium import webdriver
+import os
 import random
 import time
 from datetime import datetime, timedelta
@@ -100,6 +101,11 @@ class senacSettingsMethod():
         e = datetime.strptime(end, fmt)
         delta = e - s
         return s + timedelta(days=(random.random() * delta.days))
+    
+    def borrarArchivos(self,ruta):
+        for ruta, subdirs, files in os.walk(ruta):
+            for name in files:
+                os.remove(ruta+name , dir_fd=None)
         
 
         

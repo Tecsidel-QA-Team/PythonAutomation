@@ -5,7 +5,7 @@ from senacSettings import nameOp, HostbaseUrl, infoCuenta0, titulofield,\
     namef, surnamef, lastNameOp, companyf, contactf, addressf, addressTec, cpf, cpAdress, townf, emailf,\
     phoneCel, townC, workPhone, workPhone1, perPhone, faxPhone, countryf,infoCuenta1,\
     senacSettingsMethod, matletT, camionModels, cocheModels, cicloModels,\
-    autoBusModels, furgonetaModels, colorS, tagIdNmbr, errorTagAssignment
+    autoBusModels, furgonetaModels, colorS, tagIdNmbr, errorTagAssignment,timet
 from selenium.webdriver.support.ui import Select
 import senacSettings
 
@@ -18,61 +18,69 @@ class senacBackOffice(unittest.TestCase):
         self.settings = senacSettingsMethod()
         self.settings.setUp()
 
-    def test(self):   
-        
+    def test(self):           
         settings = self.settings
         driver = settings.driver
-        driver.get(HostbaseUrl)
-        time.sleep(5)
-        self.settings.loginPage("00001", "00001")
-        linkSel = driver.find_element_by_id("ctl00_LblUser").text
-        if linkSel == "Util.:":
-            self.selLink = senacSettings.frenlink
-            self.sexSelc = senacSettings.sexSelcFre
-        else:
-            self.selLink = senacSettings.spanlink
-            self.sexSelc = senacSettings.sexSelcSpan    
-            
-        gestionCuenta = driver.find_element_by_link_text(self.selLink[0])
-        ActionChains(driver).click_and_hold(gestionCuenta).perform()
-        time.sleep(5)
-        crearCuenta = driver.find_element_by_link_text(self.selLink[1])
-        ActionChains(driver).click_and_hold(crearCuenta).perform()
-        driver.find_element_by_link_text(self.selLink[2]).click()
-        time.sleep(2)
-        self.accoountNumbr = driver.find_element_by_id("ctl00_SectionZone_LblTitle").text
-        time.sleep(2)
-        senacBackOffice.crearcuentaSub(self)
-        time.sleep(2)
-        self.settings.elementClick("ctl00_ButtonsZone_BtnSave")
-        time.sleep(3)
-        self.settings.elementClick("ctl00_ButtonsZone_BtnExecute")
-        time.sleep(1)
-        self.settings.elementClick("ctl00_ButtonsZone_BtnValidate")
-        time.sleep(1)
-        self.settings.elementClick("ctl00_ContentZone_BtnVehicles")
-        time.sleep(1)
-        self.settings.elementClick("ctl00_ContentZone_BtnCreate")
-        time.sleep(1)
-        senacBackOffice.crearVechiulo(self)
-        time.sleep(1)
-        senacBackOffice.vehicleFieldsfill(self, self.matriNu,self.vehtypeModel,self.vehtypeKind,colorS[self.settings.ranNumbr(0,len(colorS)-1)])
-        time.sleep(3);
-        driver.find_element_by_id("ctl00_ButtonsZone_BtnSubmit").click()
-        time.sleep(1.5)
-        driver.find_element_by_id("ctl00_ButtonsZone_BtnBack").click()
-        time.sleep(1.5)
-        driver.find_element_by_id("ctl00_ButtonsZone_BtnValidate").click()
-        time.sleep(2.5)
-        senacBackOffice.tagAssignment(self)
-        if errorTagAssignment==True:
-            print("ERROR AL ASIGNAR TAG a la cuenta: "+self.accoountNumbr[7:15]+", "+self.confirMsg)
-            self.fail("Tag Invalido: No se puede asignar un Tag al Vehiculo "+self.matriNu+" de la cuenta "+self.accoountNumbr[7:-15])
-            return
-        else: 
-            print("Se ha creado la cuenta: "+self.accoountNumbr[7:15]+" con un Vehiculo con la matricula "+self.matriNu+" y el tag asignado No.: "+ self.tagIdNumbrT);
+        settings.borrarArchivos("E:\\workspace\\Mavi_Repository\\gestionCuentas_CrearCuenta\\attachments\\")
+        try:
+            driver.get(HostbaseUrl)
+            driver.get_screenshot_as_file("E:\\Selenium\\loginHostSenacPage"+timet+".jpeg")
+            driver.get_screenshot_as_file("E:\\workspace\\Mavi_Repository\\gestionCuentas_CrearCuenta\\attachments\\loginHostSenacPage.jpeg")
+            time.sleep(5)
+            self.settings.loginPage("00001", "00001")
+            driver.get_screenshot_as_file("E:\\Selenium\\loginHostSenacPage"+timet+".jpeg")
+            driver.get_screenshot_as_file("E:\\workspace\\Mavi_Repository\\gestionCuentas_CrearCuenta\\attachments\\homeHostSenacPage.jpeg")
+            linkSel = driver.find_element_by_id("ctl00_LblUser").text
+            if linkSel == "Util.:":
+                self.selLink = senacSettings.frenlink
+                self.sexSelc = senacSettings.sexSelcFre
+            else:
+                self.selLink = senacSettings.spanlink
+                self.sexSelc = senacSettings.sexSelcSpan               
+                gestionCuenta = driver.find_element_by_link_text(self.selLink[0])
+                ActionChains(driver).click_and_hold(gestionCuenta).perform()
+                time.sleep(5)
+            driver.get_screenshot_as_file("E:\\Selenium\\operatorCreatorPage"+timet+".jpeg");
+            driver.get_screenshot_as_file("E:\\workspace\\Mavi_Repository\\gestionCuentas_CrearCuenta\\attachments\\operatorCreatorPage.jpeg");
+            crearCuenta = driver.find_element_by_link_text(self.selLink[1])
+            ActionChains(driver).click_and_hold(crearCuenta).perform()
+            driver.find_element_by_link_text(self.selLink[2]).click()
+            time.sleep(2)
+            self.accoountNumbr = driver.find_element_by_id("ctl00_SectionZone_LblTitle").text
+            time.sleep(2)
+            senacBackOffice.crearcuentaSub(self)
+            time.sleep(2)
+            self.settings.elementClick("ctl00_ButtonsZone_BtnSave")
             time.sleep(3)
-        
+            self.settings.elementClick("ctl00_ButtonsZone_BtnExecute")
+            time.sleep(1)
+            self.settings.elementClick("ctl00_ButtonsZone_BtnValidate")
+            time.sleep(1)
+            self.settings.elementClick("ctl00_ContentZone_BtnVehicles")
+            time.sleep(1)
+            self.settings.elementClick("ctl00_ContentZone_BtnCreate")
+            time.sleep(1)
+            senacBackOffice.crearVechiulo(self)
+            time.sleep(1)
+            senacBackOffice.vehicleFieldsfill(self, self.matriNu,self.vehtypeModel,self.vehtypeKind,colorS[self.settings.ranNumbr(0,len(colorS)-1)])
+            time.sleep(3);
+            driver.find_element_by_id("ctl00_ButtonsZone_BtnSubmit").click()
+            time.sleep(1.5)
+            driver.find_element_by_id("ctl00_ButtonsZone_BtnBack").click()
+            time.sleep(1.5)
+            driver.find_element_by_id("ctl00_ButtonsZone_BtnValidate").click()
+            time.sleep(2.5)
+            senacBackOffice.tagAssignment(self)
+            if errorTagAssignment==True:
+                print("ERROR AL ASIGNAR TAG a la cuenta: "+self.accoountNumbr[7:15]+", "+self.confirMsg)
+                self.fail("Tag Invalido: No se puede asignar un Tag al Vehiculo "+self.matriNu+" de la cuenta "+self.accoountNumbr[7:-15])
+                return
+            else: 
+                print("Se ha creado la cuenta: "+self.accoountNumbr[7:15]+" con un Vehiculo con la matricula "+self.matriNu+" y el tag asignado No.: "+ self.tagIdNumbrT);
+                time.sleep(3)
+        except:
+                unittest.TestCase.fail()
+    
     def tearDown(self):
         driver = self.settings.driver
         driver.close()
@@ -193,6 +201,8 @@ class senacBackOffice(unittest.TestCase):
         time.sleep(1);
         if self.settings.ranNumbr(0,1)>0:
             driver.find_element_by_id("ctl00_ContentZone_ctrlAccountNotes_chk_internet_access").click()
+        driver.get_screenshot_as_file("E:\\Selenium\\accountDataFill"+timet+".jpeg");
+        driver.get_screenshot_as_file("E:\\workspace\\Mavi_Repository\\gestionCuentas_CrearCuenta\\attachments\\accountDataFill.jpeg");
         time.sleep(3);
     
     def crearVechiulo (self):
@@ -259,7 +269,10 @@ class senacBackOffice(unittest.TestCase):
                 carModelSel = 1
             self.vehtypeModel = furgonetaModels[0][carSel]
             self.vehtypeKind = furgonetaModels[carModel][carModelSel]
-    
+            
+        driver.get_screenshot_as_file("E:\\Selenium\\vehiculeCreatePage"+timet+".jpeg")
+        driver.get_screenshot_as_file("E:\\workspace\\Mavi_Repository\\gestionCuentas_CrearCuenta\\attachments\\vehiculeCreatePage.jpeg")
+        
     def vehicleFieldsfill(self, Matricul, vehtypeM, vehtypeK, ColorT):
         driver = self.settings.driver
         time.sleep(1);
@@ -290,9 +303,13 @@ class senacBackOffice(unittest.TestCase):
         time.sleep(5)
         if "ya tiene un tag asignado" in str(self.confirMsg) or "Este tag no est\x0e1 operativo" in str(self.confirMsg) or "Este tag ya est\x0e1 asignado al veh\xedculo" in str(self.confirMsg) or "Luhn incorrecto" in str(self.confirMsg):
             errorTagAssignment = True
+            driver.get_screenshot_as_file("E:\\Selenium\\tagAssignmentPageErr"+timet+".jpeg")
+            driver.get_screenshot_as_file("E:\\workspace\\Mavi_Repository\\gestionCuentas_CrearCuenta\\attachments\\tagAssignmentPageErr.jpeg")
         else:           
             tagIdNmbr = driver.find_element_by_xpath("//*[@id='ctl00_ContentZone_m_table_vehicles']/tbody/tr[2]/td[6]")
-            self.tagIdNumbrT = tagIdNmbr.text            
+            self.tagIdNumbrT = tagIdNmbr.text    
+            driver.get_screenshot_as_file("E:\\Selenium\\tagAssignmentPage"+timet+".jpeg")
+            driver.get_screenshot_as_file("E:\\workspace\\Mavi_Repository\\gestionCuentas_CrearCuenta\\attachments\\tagAssignmentPage.jpeg")        
         time.sleep(1)
     
 if __name__== "__main__":
