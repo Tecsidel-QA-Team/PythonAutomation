@@ -7,7 +7,6 @@ import time
 from datetime import datetime, timedelta
 from selenium.webdriver.support.ui import Select
 
-dateverTransacciones=""
 BoHostUrl="http://virtualbo-qa/BOQAHostCoviHonduras/web/forms/core/login.aspx"
 BoPlazaUrl="http://virtualbo-qa/BOQAPlazaCoviHonduras/web/forms/core/login.aspx"
 RUCid = "ctl00_ContentZone_ctrlAccountData_txt_RUC_box_data"
@@ -32,7 +31,6 @@ carModel=0
 mcsVersion = "lbl_version" 
 confirmationMessage=""
 errorTagAssignment = False
-tagIdNmbr=""
 colorS = ["Blanco", "Negro", "Azul", "Rojo", "Verde", "Amarillo"]
 matletT = "TRWAGMYFPDXBNJZSQVHLCKE";
 accountNumbrT="" 
@@ -51,7 +49,6 @@ timet = ('{:%Y%m%d%H%M%S}'.format(datetime.now()))
 CaCUrl="http://virtualcac-qa/CACQACovihonduras/web/forms/core/login.aspx"    
 acceptNextAlert = True;
 numbering=0
-linkPartes=""
 Types=""
 tipoSel=""
 loginField = "BoxLogin";

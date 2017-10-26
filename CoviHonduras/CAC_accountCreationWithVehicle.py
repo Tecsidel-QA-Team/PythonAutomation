@@ -26,20 +26,7 @@ class CAC_accountCreationWithVehicle(unittest.TestCase):
         settings.elementClick("ctl00_ButtonsZone_BtnValidate_IB_Label")
         time.sleep(5)
         CAC_accountCreationWithVehicle.accountCreationWithVehicle(self)
-        time.sleep(1)
-        CAC_accountCreationWithVehicle.vehicleFieldsfilled(self, self.matriNu,self.vehtypeModel,self.vehtypeKind,colorS[settings.ranNumbr(0,len(colorS)-1)])
-        time.sleep(1)
-        driver.get_screenshot_as_file("E:\\Selenium\\vehicleDataFilledPage"+timet+".jpeg")
-        driver.get_screenshot_as_file("E:\\workspace\\Maria_Repository\\accountCreationVehicle\\attachments\\vehicleDataFilledPage.jpeg")
-        time.sleep(1);                                                
-        settings.elementClick("ctl00_ButtonsZone_BtnSubmit_IB_Label")
-        time.sleep(1.50);
-        settings.elementClick("ctl00_ButtonsZone_BtnBack_IB_Label")
-        time.sleep(1.50)
-        settings.elementClick("ctl00_ButtonsZone_BtnValidate_IB_Label")
-        time.sleep(1.50)
-        driver.get_screenshot_as_file("E:\\Selenium\\accountCreated"+timet+".jpeg")
-        driver.get_screenshot_as_file("E:\\workspace\\Maria_Repository\\accountCreationVehicle\\attachments\\accountCreated.jpeg")
+        time.sleep(1)        
         print("Se ha creado la cuenta: "+self.accountNumbr[7:16]+" correctamente y con el vehículo creado con la matricula: "+str(self.matriNu))
         print("Se ha probado en la versión del CAC BO: " + self.BOVersion[1:16]+" y CAC Manager: "+self.BOVersion[17:]);
         driver.close()
@@ -82,7 +69,20 @@ class CAC_accountCreationWithVehicle(unittest.TestCase):
                 carModelSel = 1
             self.vehtypeModel = camionModels[0][carSel]
             self.vehtypeKind = camionModels[carModel][carModelSel]
-        
+            
+        CAC_accountCreationWithVehicle.vehicleFieldsfilled(self, self.matriNu,self.vehtypeModel,self.vehtypeKind,colorS[settings.ranNumbr(0,len(colorS)-1)])
+        time.sleep(1)
+        driver.get_screenshot_as_file("E:\\Selenium\\vehicleDataFilledPage"+timet+".jpeg")
+        driver.get_screenshot_as_file("E:\\workspace\\Maria_Repository\\accountCreationVehicle\\attachments\\vehicleDataFilledPage.jpeg")
+        time.sleep(1);                                                
+        settings.elementClick("ctl00_ButtonsZone_BtnSubmit_IB_Label")
+        time.sleep(1.50);
+        settings.elementClick("ctl00_ButtonsZone_BtnBack_IB_Label")
+        time.sleep(1.50)
+        settings.elementClick("ctl00_ButtonsZone_BtnValidate_IB_Label")
+        time.sleep(1.50)
+        driver.get_screenshot_as_file("E:\\Selenium\\accountCreated"+timet+".jpeg")
+        driver.get_screenshot_as_file("E:\\workspace\\Maria_Repository\\accountCreationVehicle\\attachments\\accountCreated.jpeg")        
         
     def vehicleFieldsfilled(self, Matricul, vehtypeM, vehtypeK, ColorT):
             driver = self.settings.driver

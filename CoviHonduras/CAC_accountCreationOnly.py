@@ -8,6 +8,7 @@ from Settingsfields_File import  Settingsfields_File , CaCUrl, timet, infoCuenta
         companyf,RUCid,titulofield,namef, surnamef,addressf,cpf,countryf,emailf,nameOp, \
         lastNameOp,sexSelc,addressTec, cpAdress, phoneCel, workPhone, workPhone1,perPhone, \
         faxPhone, contactf
+        
 
 
 class CAC_accountCreationOnly(unittest.TestCase):
