@@ -8,8 +8,7 @@ import BOHost_VerTransacciones
 import pypyodbc
 from time import gmtime, strftime 
           
-class BO_verConfirmacion_TransitosSubidos(unittest.TestCase):
-    
+class BO_verConfirmacion_TransitosSubidos(unittest.TestCase):    
             
     def setUp(self):
         self.settings = Settingsfields_File()
@@ -54,10 +53,13 @@ class BO_verConfirmacion_TransitosSubidos(unittest.TestCase):
                 transRes = driver.find_element_by_xpath("//*[@id='ctl00_ContentZone_tbl_logs']/tbody/tr["+str(len(transResult))+"]/td[1]/a").text
                 if transRes == self.transactionListH[0][1]:
                     print("Hay "+elementsFound[elementBg:elementEd]+" transacciones y el último tránsito: "+self.transactionListH[0][1]+" ha subido satisfactoriamente el dia de hoy "+self.dateverTransacciones+" "+self.transactionListH[0][0][8:10]+":"+self.transactionListH[0][0][10:12]+":"+self.transactionListH[0][0][12:14])
+                    driver.close()
                     return
+                    
                 else:
                     print("No se ha subido el último tránsito a BackOffice Web desde HostManage de hoy")
                     self.fail("No se ha subido el último tránsito a BackOffice Web HostManage con fecha de hoy")
+                    driver.close()
                     return           
         except:
             unittest.TestCase.fail(self)

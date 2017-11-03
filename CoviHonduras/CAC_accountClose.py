@@ -20,12 +20,12 @@ class CAC_accountClose(unittest.TestCase):
         CAC_accountClose.accountClose(self)
         time.sleep(1)
         if self.accountClosed==True:
-            print("No se puede cerrar la cuenta "+self.accountNumbr[7:16]+" porque ya est� cerrada")
+            print("No se puede cerrar la cuenta "+self.accountNumbr[7:16]+" porque ya está cerrada")
             self.fail("No se puede cerrar la cuenta "+self.accountNumbr[7:16]+" porque ya está cerrada")
             
         if self.NumbVeh==True:
             print("No se puede cerrar la cuenta "+self.accountNumbr[7:16]+" porque tiene "+str(self.NumbVeh)+" vehículo/s asignado/s")
-            self.fail("No se puede cerrar la cuenta "+self.accountNumbr[7:16]+" porque tiene "+self.NumbVeh+" veh�culo/s asignado/s")
+            self.fail("No se puede cerrar la cuenta "+self.accountNumbr[7:16]+" porque tiene "+str(self.NumbVeh)+" vehículo/s asignado/s")
         time.sleep(1)
         print("Se ha cerrado la cuenta "+self.accountNumbr[7:16]+" correctamente");
         print("Se ha probado en la versión del CAC BO: " + self.BOVersion[1:16]+" y CAC Manager: "+self.BOVersion[17:]);

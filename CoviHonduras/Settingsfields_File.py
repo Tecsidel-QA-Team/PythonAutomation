@@ -78,9 +78,10 @@ lastNameOp = ["Bonilla", "Garrido", "Garcia", "Arjonilla", "Romano", "Navarro", 
                 
  
 class Settingsfields_File():
-    def setUp(self):
-        self.driver = webdriver.Chrome("C:/Selenium/chromedriver")
-        self.driver.maximize_window()     
+    def setUp(self):    
+        self.driver = webdriver.Chrome("C:/Selenium/chromedriver")        
+        ##self.driver.maximize_window()
+             
  
     def borrarArchivos(self,ruta):
         for ruta, subdirs, files in os.walk(ruta):
@@ -103,6 +104,13 @@ class Settingsfields_File():
         driver.find_element_by_id(loginField).send_keys(usr)
         driver.find_element_by_id(passField).send_keys(pwd)
         driver.find_element_by_id(loginButton).click()
+        time.sleep(2)
+        
+    def loginPageMCS(self, usr,pwd):
+        driver = self.driver
+        driver.find_element_by_id("txt_login").send_keys(usr)
+        driver.find_element_by_id("txt_password").send_keys(pwd)
+        driver.find_element_by_id("btn_login").click()
         time.sleep(2)
     
     def ranNumbr(self, val1, val2):
